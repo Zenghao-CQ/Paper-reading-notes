@@ -14,7 +14,7 @@ GNN与传统的tensor为中心的**DL存在语义差距和**效果差距，这�
 GNN的消息传播范式与SpMM、SDDMM：
 消息传播范式与稀疏矩阵运算密切相关，以GCN为例
 * 其node-wise的运算$Y=AX$，可以看作sparse-dense matrix multiplication(**SpMM**)，即稀疏矩阵与稠密矩阵相乘；将点相关的边的特征聚合到点上，A是稀疏的邻接矩阵，X是稠密的特征矩阵
-* 而GNN计算边权常用attention weight，可以用sampled dense-dense matrix multiplication (**SDDMM**)运算$W=A(A\odot XX^{T})$，括号内两稠密矩阵相乘，然后与一个稀疏矩阵运算；它将边上节点的的特征映射到边的特征上
+* 而GNN计算边权常用attention weight，可以用sampled dense-dense matrix multiplication (**SDDMM**)运算$W=A\odot(XX^{T})$，括号内两稠密矩阵相乘，然后与一个稀疏矩阵运算；它将边上节点的的特征映射到边的特征上
 * g-SpMM，聚合点相关的边的特征得到点的特征，$Y=AX$即可
 * g-SDDMM，计算边的特征，有$XX^{T}$相当于点与点的特征相乘，用到了点的特征；用稀疏矩阵mask$A$做$\odot$，相当于用边权赋值，即用到了边的特征，在**attention**机制中使用，如**GAT**中使用
 * 正向路径中的g-SDDMM和g-SpMM的梯度计算本身也可以用g-SDDMM和g-SpMM的形式表述和计算，利于并行化和自动调整
