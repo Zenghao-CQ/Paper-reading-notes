@@ -29,6 +29,3 @@ BytePS架构：
 * Coumunication Service：在内部对本地GPU的tensor进行同步，与SS进行通信
 * Summation Service：比PS简单，通常PS运行神经网络算子，而SS只接受来自CS的tensor进行加和然后发回（这里是梯度）
 
----
-大企业、公有云共享集群运行多个任务
-fledged羽毛丰满的、成熟的
