@@ -46,10 +46,14 @@ distGNN可以为一个trainer生成多个sampler来，并行产生mini-batch
 **一个提升是**
 **需要预处理用METIS来手动划分固定数量的sub-graph**
 **sampler、trainer、update，三者之间副本更新与平衡，流水线，自动伸缩？**
-**机器性能差距大**->性能，trainer、sampler副本个数的调整
+**机器性能差距大时**->性能，trainer、sampler副本个数的调整
+一个epoch中可能会等待不同机器的完成
 
 **显然trainer需要大量GPU资源、而sampler未必，可以看一下具体实现，根据资源利用情况进行分配**
 
 工作方向：
 * 采样算法：将大图拆分为子图
 * 获取节点特征时候需要大量多个hop内的邻居节点信息，此时交换模型的梯度参数需要占用大量网络流量
+* 目前一个节点只有一个server和若干backup server
+
+采样梯度时、从单个batch计算梯度，聚合，各自更新
