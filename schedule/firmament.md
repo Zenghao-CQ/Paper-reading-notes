@@ -15,11 +15,12 @@ quincy首先提出MCMF，使用增量优化减少时间并且可以回滚，同�
 
 架构：包括U点(unscheduled)表示未调度；Policy-defined aggregator node聚合点，来减少边数
 
+算法：relaxation，在任务流的目的地是无竞争的，调度选择很简单直接时，工作量少。但是在批处理集群的高负载和超额订阅中表现不好
+
 策略：面向伸缩性，提出了三种可解释性策略：
 * 负载分散：load-spread，任务连到一个集群层面的聚合节点，聚合点到集群的边与已有任务成正比，不需要也不使用完整复杂性
 * quincy policy：用机架聚合器和集群聚合器来体现批任务的局部性，任务偏好数据局部性和，适用于批处理作业，并针对数据局部性、任务等待时间和抢占成本之间的权衡进行了优化。
 * network-aware policy：减小网络带宽，用request aggregator连接，到机器的cost是请求带宽和机器空闲带宽的总和
-
 
 batch schedule(平均同步，All or nothing)
 平均多个任务之间的性能均衡，不同设备，不同batch size
